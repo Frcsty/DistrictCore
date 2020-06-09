@@ -5,7 +5,9 @@ import com.github.frcsty.districtcore.util.Color;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.components.ItemNBT;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ToolBuilder {
 
@@ -26,6 +28,13 @@ public class ToolBuilder {
                 .setLore(Color.colorize(config.getStringList("tools." + tool + ".lore")))
                 .build();
 
+        final ItemMeta meta = item.getItemMeta();
+
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(meta);
+
         item = ItemNBT.setNBTTag(item, "tool", tool);
 
         return item;
@@ -37,6 +46,13 @@ public class ToolBuilder {
                 .setName(Color.colorize(config.getString("tools." + tool + "." + multiplier + ".display")))
                 .setLore(Color.colorize(config.getStringList("tools." + tool + "." + multiplier + ".lore")))
                 .build();
+
+        final ItemMeta meta = item.getItemMeta();
+
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(meta);
 
         item = ItemNBT.setNBTTag(item, "tool", tool);
 

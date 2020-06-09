@@ -53,16 +53,17 @@ class LeaderBoardMenus {
             }
             final Map.Entry<UUID, Long> user = iterator.next();
             final OfflinePlayer player = Bukkit.getOfflinePlayer(user.getKey());
+            final int playerPosition = place++;
             ItemStack item = new ItemBuilder(new ItemStack(leaderboard.getInt("material"), 1
                     , (short) leaderboard.getInt("data")))
                     .setName(Color.colorize(Replace.replaceString(leaderboard.getString("display")
-                            , "{position}", String.valueOf(place)
+                            , "{position}", String.valueOf(playerPosition)
                             , "{player}", player.getName())))
 
                     .setLore(Color.colorize(Replace.replaceList(leaderboard.getStringList("lore")
                             , "{player}", player.getName()
                             , "{statistic-value}", String.valueOf(user.getValue())
-                            , "{position}", String.valueOf(place))))
+                            , "{position}", String.valueOf(playerPosition))))
                     .build();
 
             final SkullMeta meta = (SkullMeta) item.getItemMeta();

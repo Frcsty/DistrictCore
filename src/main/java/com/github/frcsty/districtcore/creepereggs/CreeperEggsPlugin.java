@@ -6,7 +6,6 @@ import com.github.frcsty.districtcore.creepereggs.listener.BlockExplodeListener;
 import com.github.frcsty.districtcore.creepereggs.listener.CeggThrowListener;
 import com.github.frcsty.districtcore.creepereggs.object.ObjectStorage;
 import de.dustplanet.util.SilkUtil;
-import me.mattstudios.mf.base.CommandManager;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -21,11 +20,8 @@ public class CreeperEggsPlugin {
     }
 
     public void onEnable() {
-        core.saveDefaultConfig();
         silkUtil = SilkUtil.hookIntoSilkSpanwers();
-
-        final CommandManager commandManager = new CommandManager(core);
-        commandManager.register(new GiveEggCommand(core, this));
+        core.addCommand(new GiveEggCommand(core, this));
 
         objectStorage.loadSpawnEggs(core);
         getServer().getPluginManager().registerEvents(new CeggThrowListener(core, this), core);
@@ -33,8 +29,6 @@ public class CreeperEggsPlugin {
     }
 
     public void onDisable() {
-        core.reloadConfig();
-
         objectStorage.getSpawnEggsHashMap().clear();
     }
 

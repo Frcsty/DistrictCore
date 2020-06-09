@@ -5,7 +5,6 @@ import com.github.frcsty.districtcore.tools.commands.*;
 import com.github.frcsty.districtcore.tools.listener.BlockDamageListener;
 import com.github.frcsty.districtcore.tools.listener.ItemUseListener;
 import com.github.frcsty.districtcore.tools.util.ActionBarAPI;
-import me.mattstudios.mf.base.CommandManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -22,6 +21,7 @@ public class ToolsPlugin {
     private final DistrictCore core;
     private final ActionBarAPI actionBarAPI;
     private Economy economy;
+
     public ToolsPlugin(final DistrictCore core) {
         this.core = core;
 
@@ -29,8 +29,6 @@ public class ToolsPlugin {
     }
 
     public void onEnable() {
-        core.saveDefaultConfig();
-
         final Plugin shopGuiPlusPlugin = getServer().getPluginManager().getPlugin("ShopGUIPlus");
         if (shopGuiPlusPlugin != null && !shopGuiPlusPlugin.isEnabled()) {
             core.getLogger().log(Level.WARNING, "Failed to initialize ShopGUIPlus API! Disabling plugin.");
@@ -45,18 +43,12 @@ public class ToolsPlugin {
         }
         economy = economyProvider.getProvider();
 
-        final CommandManager commandManager = new CommandManager(core);
-
-        commandManager.register(new TrayPickaxe(core), new TrenchPickaxe(core)
+        core.addCommands(new TrayPickaxe(core), new TrenchPickaxe(core)
                 , new SandWand(core), new LightningWand(core), new CraftWand(core)
                 , new SellWand(core));
 
         registerEvents();
         actionBarAPI.enable();
-    }
-
-    public void onDisable() {
-        core.reloadConfig();
     }
 
     private void registerEvents() {

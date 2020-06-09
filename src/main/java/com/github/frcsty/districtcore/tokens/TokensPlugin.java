@@ -10,7 +10,6 @@ import com.github.frcsty.districtcore.tokens.placeholder.Placeholders;
 import com.github.frcsty.districtcore.tokens.token.FileManager;
 import com.github.frcsty.districtcore.tokens.token.TokenManager;
 import com.github.frcsty.districtcore.tokens.token.TokenStorage;
-import me.mattstudios.mf.base.CommandManager;
 import org.bukkit.plugin.ServicePriority;
 
 public class TokensPlugin {
@@ -19,6 +18,7 @@ public class TokensPlugin {
     private FileManager fileManager;
     private TokenStorage tokenStorage;
     private TokenManager tokenManager;
+
     public TokensPlugin(final DistrictCore core) {
         this.core = core;
     }
@@ -26,14 +26,12 @@ public class TokensPlugin {
     public void onEnable() {
         fileManager = new FileManager(core);
         tokenStorage = new TokenStorage();
-        core.saveDefaultConfig();
 
         fileManager.createTokenFile();
         tokenStorage.load(fileManager);
         this.tokenManager = new TokenManager(tokenStorage);
 
-        final CommandManager commandManager = new CommandManager(core);
-        commandManager.register(new TokensGiveCommand(this, core), new TokensCommand(this, core)
+        core.addCommands(new TokensCommand(this, core), new TokensGiveCommand(this, core)
                 , new TokensResetCommand(this, core), new TokensPayCommand(this, core));
         new Placeholders(tokenManager).register();
 
@@ -42,8 +40,6 @@ public class TokensPlugin {
     }
 
     public void onDisable() {
-        core.reloadConfig();
-
         tokenStorage.save(fileManager);
         fileManager.saveTokenFile();
 
