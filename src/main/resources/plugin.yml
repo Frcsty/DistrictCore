@@ -1,0 +1,5 @@
+name: DistrictCore
+version: ${project.version}
+main: com.github.frcsty.districtcore.DistrictCore
+author: Frcsty
+depend: ["ShopGUIPlus", "Vault", "SilkSpawners", "ProtocolLib"]

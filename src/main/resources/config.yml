@@ -1,0 +1,234 @@
+messages:
+  invalid-player: 'Specified player is not valid!'
+  tokens-check-self: 'You have {tokens} tokens!'
+  tokens-check-other: 'Player {player} has {tokens} tokens.'
+  cannot-pay-self: 'You can not pay yourself tokens'
+  not-enough-tokens: 'You do not have enough tokens!'
+  paid-tokens: 'You have paid {player} {tokens} tokens'
+  received-tokens: '{player} has paid you {tokens} tokens'
+  gave-tokens: 'You have given {player} {tokens} tokens'
+  reset-tokens: "You have reset {player}'s tokens!"
+  struck-lightning: '&aStruck lightning'
+  lightning-wand-cooldown: '&cLightning Wand is on cooldown &8- &f{time}s'
+  condensed-chest-contents: "&aSuccessfully condensed chest's contents"
+  sold-chest-contents: '&fSold all items for&8: &a${amount} &8(Multi: &f{multi}&8)'
+  reload-plugin: 'Successfully reloaded plugin in {time}ms'
+  invalid-target: 'Invalid target'
+  offline-target: 'Player {player} is offline'
+  invalid-cegg: '{type} does not exist'
+  used-cegg: 'Used {type} creeper egg.'
+  reloaded-config: '&aReloaded config.'
+  invalid-stats-player: '&7Specified player does not exist!'
+  cannot-stats-console: '&cYou can not stats check a console sender..'
+  gui-error-occurred: '&cAn error has occurred while loading the leaderboards menu, please contact staff.'
+  no-category-stats: 'There is no statistics present for this category!'
+  offline-player: '&8[&5Elixirs&8] &7Player &f{player} &7is offline.'
+  invalid-elixir: '&8[&5Elixirs&8] &7Elixir &f{elixir} &7does not exist!'
+  target-full-inventory: '&8[&5Elixirs&8] &7Player &f{player} &7has a full inventory! Dropping items on the ground.'
+
+#    _____ _ _     _
+#   |   __| |_|_ _|_|___ ___
+#   |   __| | |_'_| |  _|_ -|
+#   |_____|_|_|_,_|_|_| |___|
+#
+
+elixirs:
+  fused:
+    type: INSTANT_DAMAGE
+    material: POTION
+    splash: true
+    data: 1
+    display: '&dFused Elixir'
+    lore:
+      - '&7Used by warriors to destroy their'
+      - '&7opponents in intense battles!'
+      - ''
+    effects:
+      increase_damage:
+        duration: 90
+        amplifier: 1
+      speed:
+        duration: 90
+        amplifier: 1
+  aquatic:
+    type: WATER_BREATHING
+    material: POTION
+    splash: false
+    data: 1
+    display: '&bAquatic Elixir'
+    lore:
+      - '&7Explore the sunken ruins with ease'
+      - '&7while using this bizarre concoction.'
+      - ''
+    effects:
+      water_breathing:
+        duration: 1800
+        amplifier: 0
+
+
+#      _____ _       _   _     _   _
+#     |   __| |_ ___| |_|_|___| |_|_|___ ___
+#     |__   |  _| .'|  _| |_ -|  _| |  _|_ -|
+#     |_____|_| |__,|_| |_|___|_| |_|___|___|
+
+time: '%dd %02dh %02dm %02ds'
+statistics:
+  - 'stat.playOneMinute'
+  - 'stat.playerKills'
+  - 'stat.deaths'
+  - 'stat.useItem.minecraft.reeds'
+  - 'stat.killEntity.Blaze'
+stats:
+  - '&4Checking statistics for &7{player}&4..'
+  - ' &8• &7Play Time&8: &f{statistic:stat.playOneMinute}'
+  - ' &8• &7Kills&8: &f{statistic:stat.playerKills}'
+  - ' &8• &7Deaths&8: &f{statistic:stat.deaths}'
+  - ' &8• &7Sugarcane Broken&8: &f{statistic:stat.useItem.minecraft.reeds}'
+selector-menu:
+  title: '&4(&8!&4) &r&8Statistics Leaderboards &4(&8!&4)'
+  rows: 3
+  items:
+    blaze:
+      material: 369
+      data: 0
+      slot: 11
+      menu: "blaze-menu"
+      display: ' '
+      lore:
+        - ' &4(&8!&4) &7Click to view the top &f7'
+        - " &4(&8!&4) &7leaderboards for Blaze's killed"
+        - ''
+  background:
+    filler:
+      material: 160
+      data: 7
+      display: ''
+      lore: ['']
+      slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+menus:
+  blaze-menu:
+    title: "   &4(&8!&4) &r&8Blaze's Killed Top 7 &4(&8!&4)"
+    rows: 3
+    path: "stat.killEntity.Blaze"
+    leaderboard:
+      material: 397
+      data: 3
+      display: '&9Position&8: &f#{position}'
+      lore:
+        - ''
+        - ' &8• &7Player&8: &f{player}'
+        - ' &8• &7Killed&8: &f{statistic-value}'
+        - ''
+      slots: [10, 11, 12, 13, 14, 15, 16]
+    no-user:
+      material: 397
+      owner: Axuk
+      data: 3
+      display: '&cNo user'
+      lore:
+        - ''
+        - ' &8• &7There is no user'
+        - ' &8• &7ocupating this position!'
+        - ''
+    items:
+      filler:
+        material: 160
+        data: 7
+        display: ''
+        lore: ['']
+        slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+
+#       _____                            _____
+#      |     |___ ___ ___ ___ ___ ___   |   __|___ ___ ___
+#      |   --|  _| -_| -_| . | -_|  _|  |   __| . | . |_ -|
+#      |_____|_| |___|___|  _|___|_|    |_____|_  |_  |___|
+#                        |_|                  |___|___|
+
+ceggs:
+  throwable:
+    type: THROWABLE
+    material: MONSTER_EGG
+    data: 13
+    glow: false
+    power: 4
+    drop-percentage: 100
+    display: '&cThrowable Creeper Egg'
+    lore:
+      - '&7Some cheezy lore..'
+  charged:
+    type: CHARGED
+    material: MONSTER_EGG
+    data: 10
+    glow: true
+    drop-percentage: 60
+    display: '&9Charged Creeper Egg'
+    lore:
+      - '&7Some cheezy lore..'
+  charged_throwable:
+    type: THROWABLE_CHARGED
+    material: MONSTER_EGG
+    data: 5
+    glow: true
+    power: 8.5
+    drop-percentage: 30
+    display: '&bCharged Throwable Creeper Egg'
+    lore:
+      - '&0Some cheezy lore..'
+
+#     _____         _
+#    |_   _|___ ___| |___
+#      | | | . | . | |_ -|
+#      |_| |___|___|_|___|
+
+tools:
+  tray:
+    material: 278
+    data: 0
+    display: '&9&lTray Pickaxe'
+    lore:
+      - ' Some lore..'
+  trench:
+    material: 278
+    data: 0
+    display: '&b&lTrench Pickaxe'
+    lore:
+      - ' Some lore...'
+  sand:
+    material: 293
+    data: 0
+    delay: 5 # Ticks
+    display: '&c&lSand Wand'
+    lore:
+      - ' Some lore....'
+  lightning:
+    material: 268
+    data: 0
+    delay: 5 # Seconds (5 seconds cooldown, first being strike)
+    display: '&a&lLightning Wand'
+    lore:
+      - ' Some lore.....'
+  craft:
+    material: 359
+    data: 0
+    display: '&d&lCraft Wand'
+    lore:
+      - ' Some lore......'
+  sell:
+    1.0:
+      material: 293
+      data: 0
+      display: '&5&lSell Wand 1x'
+      lore:
+        - ' Some lore.......'
+    1.5:
+      material: 293
+      data: 0
+      display: '&5&lSell Wand 1.5x'
+      lore:
+        - ' Some lore.......'
+    2.0:
+      material: 293
+      data: 0
+      display: '&5&lSell Wand 2x'
+      lore:
+        - ' Some lore.......'
