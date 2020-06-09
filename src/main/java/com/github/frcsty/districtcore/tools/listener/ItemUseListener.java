@@ -65,6 +65,11 @@ public class ItemUseListener implements Listener {
             final String delay = ItemNBT.getNBTTag(item, "delay");
             final List<Material> materials = Arrays.asList(Material.SAND, Material.GRAVEL);
             int sY = 256;
+
+            if (block.getLocation() == null) {
+                return;
+            }
+
             for (int i = block.getLocation().getBlockY(); i < 256; i++) {
                 if (!materials.contains(world.getBlockAt(new Location(world, block.getLocation().getBlockX(), i, block.getLocation().getBlockZ())).getType())) {
                     sY = i;

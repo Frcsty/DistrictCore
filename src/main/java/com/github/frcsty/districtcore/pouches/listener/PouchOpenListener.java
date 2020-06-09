@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -65,6 +66,17 @@ public class PouchOpenListener implements Listener {
         player.setItemInHand(item);
 
         usePouch(player, pouch);
+    }
+
+    @EventHandler
+    public void onPouchPlace(BlockPlaceEvent event) {
+        final ItemStack item = event.getItemInHand();
+
+        final String pouchType = ItemNBT.getNBTTag(item, "pouch");
+
+        if (pouchType != null) {
+            event.setCancelled(true);
+        }
     }
 
     private void usePouch(final Player player, final Pouch pouch) {
