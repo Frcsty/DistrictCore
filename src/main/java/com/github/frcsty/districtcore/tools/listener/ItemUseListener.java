@@ -13,7 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,16 +25,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
+import static com.github.frcsty.districtcore.tools.ToolsPlugin.getEconomy;
+
 public class ItemUseListener implements Listener {
 
     private final ToolsPlugin plugin;
     private final DistrictCore core;
-    private final FileConfiguration config;
 
     public ItemUseListener(final DistrictCore core, final ToolsPlugin plugin) {
         this.core = core;
         this.plugin = plugin;
-        this.config = core.getConfig();
     }
 
     @EventHandler
@@ -103,6 +102,7 @@ public class ItemUseListener implements Listener {
             final int delay = Integer.valueOf(ItemNBT.getNBTTag(item, "delay"));
             final Set<Material> transparent = new TreeSet<>();
 
+            final int slot = player.getInventory().getHeldItemSlot();
             transparent.add(Material.AIR);
             new BukkitRunnable() {
                 int i = delay;
@@ -112,13 +112,13 @@ public class ItemUseListener implements Listener {
                     if (i == delay) {
                         world.strikeLightning(player.getTargetBlock(transparent, 100).getLocation());
                         player.getInventory().setItemInHand(new ToolBuilder(core, "lightning", 1).getCooldownItem(true));
-                        actionBar.sendActionBar(player, Color.colorize(config.getString("messages.struck-lightning")));
+                        actionBar.sendActionBar(player, Color.colorize(core.getMessageLoader().getMessage("struck-lightning")));
                     }
                     if (i > 0 && i < delay) {
-                        actionBar.sendActionBar(player, Replace.replaceString(Color.colorize(config.getString("messages.lightning-wand-cooldown")), "{time}", String.valueOf(i)));
+                        actionBar.sendActionBar(player, Replace.replaceString(Color.colorize(core.getMessageLoader().getMessage("lightning-wand-cooldown")), "{time}", String.valueOf(i)));
                     }
                     if (i == 0) {
-                        player.getInventory().setItemInHand(new ToolBuilder(core, "lightning", 1).getCooldownItem(false));
+                        player.getInventory().setItem(slot, new ToolBuilder(core, "lightning", 1).getCooldownItem(false));
                         cancel();
                     }
                     i--;
@@ -133,7 +133,7 @@ public class ItemUseListener implements Listener {
             final Condense condense = new Condense();
             condense.run(block);
 
-            actionBar.sendActionBar(player, Color.colorize(config.getString("messages.condensed-chest-contents")));
+            actionBar.sendActionBar(player, Color.colorize(core.getMessageLoader().getMessage("condensed-chest-contents")));
             event.setCancelled(true);
         }
         if (data.equalsIgnoreCase("sell")) {
@@ -166,8 +166,8 @@ public class ItemUseListener implements Listener {
                 }
             }
 
-            plugin.getEconomy().depositPlayer(player, amount * multiplier);
-            actionBar.sendActionBar(player, Replace.replaceString(Color.colorize(config.getString("messages.sold-chest-contents")), "{amount}", String.valueOf(amount * multiplier), "{multi}", String.valueOf(multiplier)));
+            getEconomy().depositPlayer(player, amount * multiplier);
+            actionBar.sendActionBar(player, Replace.replaceString(Color.colorize(core.getMessageLoader().getMessage("sold-chest-contents")), "{amount}", String.valueOf(amount * multiplier), "{multi}", String.valueOf(multiplier)));
             event.setCancelled(true);
         }
     }

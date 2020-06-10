@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.tools;
 
+import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.tools.commands.*;
 import com.github.frcsty.districtcore.tools.listener.BlockDamageListener;
@@ -16,11 +17,11 @@ import java.util.logging.Level;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class ToolsPlugin {
+public class ToolsPlugin implements CorePlugin {
 
     private final DistrictCore core;
     private final ActionBarAPI actionBarAPI;
-    private Economy economy;
+    private static Economy economy;
 
     public ToolsPlugin(final DistrictCore core) {
         this.core = core;
@@ -51,14 +52,18 @@ public class ToolsPlugin {
         actionBarAPI.enable();
     }
 
+    public void onDisable() {
+
+    }
+
     private void registerEvents() {
         final List<Listener> listeners = Arrays.asList(new BlockDamageListener(this), new ItemUseListener(core, this));
 
         listeners.forEach(listener -> getServer().getPluginManager().registerEvents(listener, core));
     }
 
-    public final Economy getEconomy() {
-        return this.economy;
+    public static Economy getEconomy() {
+        return economy;
     }
 
     public final ActionBarAPI getActionBarAPI() {

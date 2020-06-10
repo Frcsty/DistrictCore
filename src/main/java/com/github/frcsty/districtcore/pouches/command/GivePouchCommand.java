@@ -9,7 +9,6 @@ import me.mattstudios.mf.annotations.*;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,12 +21,10 @@ public class GivePouchCommand extends CommandBase {
 
     private final PouchesPlugin plugin;
     private final DistrictCore core;
-    private final FileConfiguration config;
 
     public GivePouchCommand(final PouchesPlugin plugin, final DistrictCore core) {
         this.plugin = plugin;
         this.core = core;
-        this.config = core.getConfig();
     }
 
     @Default
@@ -46,7 +43,7 @@ public class GivePouchCommand extends CommandBase {
         }.runTaskAsynchronously(core);
 
         final String estimatedTime = String.valueOf(System.currentTimeMillis() - startTime);
-        sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.reload-plugin"), "{time}", estimatedTime)));
+        sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("reload-plugin"), "{time}", estimatedTime)));
     }
 
     @SubCommand("give")
@@ -56,27 +53,27 @@ public class GivePouchCommand extends CommandBase {
         final ItemStack item = getItem(plugin.getPouchStorage(), pouch, amount);
 
         if (item == null) {
-            sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.invalid-pouch"), "{type}", pouch)));
+            sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("invalid-pouch"), "{type}", pouch)));
             return;
         }
 
         if (target == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-target")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-target")));
             return;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.offline-target"), "{player}", target.getName())));
+            sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("offline-target"), "{player}", target.getName())));
             return;
         }
 
         if (target.getInventory().firstEmpty() == -1) {
-            target.sendMessage(Color.colorize(config.getString("messages.target-full-inventory")));
+            target.sendMessage(Color.colorize(core.getMessageLoader().getMessage("target-full-inventory")));
             target.getWorld().dropItem(target.getLocation(), item);
         } else {
             target.getInventory().addItem(item);
         }
 
-        target.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.target-receive-pouch"), "{amount}", String.valueOf(amount), "{type}", pouch)));
+        target.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("target-receive-pouch"), "{amount}", String.valueOf(amount), "{type}", pouch)));
     }
 }

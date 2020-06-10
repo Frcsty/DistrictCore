@@ -33,7 +33,7 @@ public class SelectorMenu {
 
                 viewer.closeInventory();
                 if (newMenu == null) {
-                    viewer.sendMessage(Color.colorize(core.getConfig().getString("messages.no-category-stats")));
+                    viewer.sendMessage(Color.colorize(core.getMessageLoader().getMessage("no-category-stats")));
                     return;
                 }
 

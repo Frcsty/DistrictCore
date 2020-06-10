@@ -1,10 +1,11 @@
 package com.github.frcsty.districtcore.elixirs;
 
+import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.elixirs.command.ElixirGiveCommand;
 import com.github.frcsty.districtcore.elixirs.elixir.ElixirStorage;
 
-public class ElixirsPlugin {
+public class ElixirsPlugin implements CorePlugin {
 
     private final DistrictCore core;
     private final ElixirStorage elixirStorage = new ElixirStorage();

@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.creepereggs;
 
+import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.creepereggs.command.GiveEggCommand;
 import com.github.frcsty.districtcore.creepereggs.listener.BlockExplodeListener;
@@ -9,7 +10,7 @@ import de.dustplanet.util.SilkUtil;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class CreeperEggsPlugin {
+public class CreeperEggsPlugin implements CorePlugin {
 
     private final DistrictCore core;
     private final ObjectStorage objectStorage = new ObjectStorage();

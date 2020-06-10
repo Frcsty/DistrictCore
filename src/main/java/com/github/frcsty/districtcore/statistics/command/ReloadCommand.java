@@ -31,6 +31,6 @@ public class ReloadCommand extends CommandBase {
                 plugin.getStorage().loadUsers(core);
             }
         }.runTaskAsynchronously(core);
-        sender.sendMessage(Color.colorize(core.getConfig().getString("messages.reloaded-config")));
+        sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("reloaded-config")));
     }
 }

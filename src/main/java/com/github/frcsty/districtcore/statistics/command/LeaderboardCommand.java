@@ -31,7 +31,7 @@ public class LeaderboardCommand extends CommandBase {
         final Gui menu = SelectorMenu.getSelectorMenu(core, plugin);
 
         if (menu == null) {
-            player.sendMessage(Color.colorize(core.getConfig().getString("messages.gui-error-occurred")));
+            player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("gui-error-occurred")));
             return;
         }
 

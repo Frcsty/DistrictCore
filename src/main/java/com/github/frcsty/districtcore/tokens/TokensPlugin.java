@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.tokens;
 
+import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.tokens.command.TokensCommand;
 import com.github.frcsty.districtcore.tokens.command.TokensGiveCommand;
@@ -12,7 +13,7 @@ import com.github.frcsty.districtcore.tokens.token.TokenManager;
 import com.github.frcsty.districtcore.tokens.token.TokenStorage;
 import org.bukkit.plugin.ServicePriority;
 
-public class TokensPlugin {
+public class TokensPlugin implements CorePlugin {
 
     private final DistrictCore core;
     private FileManager fileManager;

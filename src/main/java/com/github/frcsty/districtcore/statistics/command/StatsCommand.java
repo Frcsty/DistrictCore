@@ -13,19 +13,18 @@ import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
 @Command("stats")
 public class StatsCommand extends CommandBase {
 
-    private final FileConfiguration config;
     private final StatisticStorage storage;
+    private final DistrictCore core;
 
     public StatsCommand(final DistrictCore core, final StatisticsPlugin plugin) {
-        this.config = core.getConfig();
         this.storage = plugin.getStorage();
+        this.core = core;
     }
 
     @Default
@@ -34,7 +33,7 @@ public class StatsCommand extends CommandBase {
 
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage(Color.colorize(config.getString("messages.cannot-stats-console")));
+                sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("cannot-stats-console")));
                 return;
             }
 
@@ -46,7 +45,7 @@ public class StatsCommand extends CommandBase {
         final OfflinePlayer target = args.length == 1 ? Bukkit.getOfflinePlayer(args[0]) : null;
 
         if (target == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-stats-player")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-stats-player")));
             return;
         }
 
@@ -55,8 +54,8 @@ public class StatsCommand extends CommandBase {
 
     private void sendMessage(final OfflinePlayer target, final CommandSender sender) {
         final StatisticWrapper wrapper = storage.getUserStatisticWrapper(target);
-        config.getStringList("stats").forEach(line -> {
-            final String message = Color.colorize(com.github.frcsty.districtcore.statistics.util.Replace.replaceStatisticString(line, wrapper, config.getString("time")));
+        core.getConfig().getStringList("stats").forEach(line -> {
+            final String message = Color.colorize(com.github.frcsty.districtcore.statistics.util.Replace.replaceStatisticString(line, wrapper, core.getConfig().getString("time")));
             sender.sendMessage(Replace.replaceString(message, "{player}", target.getName()));
         });
     }

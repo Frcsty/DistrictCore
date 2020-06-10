@@ -11,7 +11,6 @@ import me.mattstudios.mf.annotations.SubCommand;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
@@ -29,17 +28,16 @@ public class TokensResetCommand extends CommandBase {
     @SubCommand("reset")
     @Permission("tokens.reset")
     public void tokensResetCommand(final CommandSender sender, final String target) {
-        final FileConfiguration config = core.getConfig();
         final Player player = Bukkit.getPlayerExact(target);
         if (player == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-player")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-player")));
             return;
         }
 
         final TokenManager manager = plugin.getTokenManager();
 
         manager.resetTokens(player);
-        sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.reset-tokens")
+        sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("reset-tokens")
                 , "{player}", player.getName())));
     }
 }

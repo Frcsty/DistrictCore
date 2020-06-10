@@ -11,7 +11,6 @@ import me.mattstudios.mf.annotations.*;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,12 +21,11 @@ public class GiveEggCommand extends CommandBase {
 
     private final DistrictCore core;
     private final CreeperEggsPlugin plugin;
-    private final FileConfiguration config;
+
 
     public GiveEggCommand(final DistrictCore core, final CreeperEggsPlugin plugin) {
         this.core = core;
         this.plugin = plugin;
-        this.config = core.getConfig();
     }
 
     @Default
@@ -46,7 +44,7 @@ public class GiveEggCommand extends CommandBase {
         }.runTaskAsynchronously(core);
 
         final String estimatedTime = String.valueOf(System.currentTimeMillis() - startTime);
-        sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.reload-plugin"), "{time}", estimatedTime)));
+        sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("reload-plugin"), "{time}", estimatedTime)));
     }
 
     @SubCommand("give")
@@ -55,26 +53,26 @@ public class GiveEggCommand extends CommandBase {
         final Player target = Bukkit.getPlayerExact(inputTarget);
 
         if (target == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-target")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-target")));
             return;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.offline-target"), "{player}", target.getName())));
+            sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("offline-target"), "{player}", target.getName())));
             return;
         }
 
         final SpawnEgg spawnEgg = plugin.getObjectStorage().getSpawnEgg(inputCegg.toLowerCase());
 
         if (spawnEgg == null) {
-            sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.invalid-cegg"), "{type}", inputCegg)));
+            sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("invalid-cegg"), "{type}", inputCegg)));
             return;
         }
 
         final ItemStack item = new SpawnEggBuilder(inputCegg.toLowerCase(), spawnEgg.getMaterial(), spawnEgg.getData(), spawnEgg.getDisplay(), spawnEgg.getLore(), amount, spawnEgg.isGlow(), spawnEgg.getType()).getItem();
 
         if (target.getInventory().firstEmpty() == -1) {
-            sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.target-full-inventory"), "{player}", target.getName())));
+            sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("target-full-inventory"), "{player}", target.getName())));
             target.getWorld().dropItem(target.getLocation(), item);
             return;
         }

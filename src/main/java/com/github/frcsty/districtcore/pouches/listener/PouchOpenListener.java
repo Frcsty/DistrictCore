@@ -9,6 +9,7 @@ import me.mattstudios.mfgui.gui.components.ItemNBT;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -71,12 +72,14 @@ public class PouchOpenListener implements Listener {
     @EventHandler
     public void onPouchPlace(BlockPlaceEvent event) {
         final ItemStack item = event.getItemInHand();
+        final Block block = event.getBlockPlaced();
+        if (item == null || block == null) return;
 
         final String pouchType = ItemNBT.getNBTTag(item, "pouch");
+        if (pouchType == null) return;
+        if (pouchType.length() == 0) return;
 
-        if (pouchType != null) {
-            event.setCancelled(true);
-        }
+        event.setCancelled(true);
     }
 
     private void usePouch(final Player player, final Pouch pouch) {

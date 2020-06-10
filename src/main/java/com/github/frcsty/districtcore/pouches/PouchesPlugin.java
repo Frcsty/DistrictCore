@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.pouches;
 
+import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.pouches.command.GivePouchCommand;
 import com.github.frcsty.districtcore.pouches.listener.PouchOpenListener;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class PouchesPlugin {
+public class PouchesPlugin implements CorePlugin {
     private final DistrictCore core;
     private final PouchStorage pouchStorage = new PouchStorage();
     private final Actions actions = new Actions();
@@ -34,6 +35,10 @@ public class PouchesPlugin {
 
         getServer().getPluginManager().registerEvents(new PouchOpenListener(core, this), core);
         pouchStorage.loadPouches(core);
+    }
+
+    public void onDisable() {
+
     }
 
     public final PouchStorage getPouchStorage() {

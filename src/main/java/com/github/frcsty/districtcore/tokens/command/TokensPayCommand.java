@@ -10,7 +10,6 @@ import me.mattstudios.mf.annotations.Permission;
 import me.mattstudios.mf.annotations.SubCommand;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
@@ -28,31 +27,30 @@ public class TokensPayCommand extends CommandBase {
     @SubCommand("pay")
     @Permission("tokens.pay")
     public void tokensPayCommand(final Player player, final String targetString, final Long tokens) {
-        final FileConfiguration config = core.getConfig();
         final Player target = Bukkit.getPlayerExact(targetString);
 
         if (target == null) {
-            player.sendMessage(Color.colorize(config.getString("messages.invalid-player")));
+            player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-player")));
             return;
         }
 
         if (player.equals(target)) {
-            player.sendMessage(Color.colorize(config.getString("messages.cannot-pay-self")));
+            player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("cannot-pay-self")));
             return;
         }
         final TokenManager manager = plugin.getTokenManager();
 
         if (manager.getTokens(player) < tokens) {
-            player.sendMessage(Color.colorize(config.getString("messages.not-enough-tokens")));
+            player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("not-enough-tokens")));
             return;
         }
 
         manager.removeTokens(player, tokens);
         manager.addTokens(target, tokens);
-        player.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.paid-tokens")
+        player.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("paid-tokens")
                 , "{player}", target.getName()
                 , "{tokens}", String.valueOf(tokens))));
-        target.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.received-tokens")
+        target.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("received-tokens")
                 , "{player}", player.getName()
                 , "{tokens}", String.valueOf(tokens))));
     }

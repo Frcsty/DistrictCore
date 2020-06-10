@@ -27,6 +27,72 @@ messages:
   target-full-inventory: '&8[&5Elixirs&8] &7Player &f{player} &7has a full inventory! Dropping items on the ground.'
   invalid-pouch: '&8[&e&l!&8] &cPouch &7{type} &cis not of valid type!' # {type}
   target-receive-pouch: '&8[&e&l!&8] &eYou received a pouch' # {amount}, {type}
+  given-collector-item: 'You have been given {amount} collector item(s)'
+  cannot-break-collector: 'Use the collectors gui to pick it up!'
+  beacons-are-disabled: 'You cannot place a beacon as they are disabled!'
+  already-contains-collector: 'Could not place down the collector as the chunk already contains one!'
+  placed-collector: 'You have placed a collector!'
+  sold-collector-items: 'You have sold {amount} {material} for ${price}'
+
+collector:
+  material: 138
+  data: 0
+  display: '&b&lChunk Collector'
+  lore:
+    - ''
+    - ' &7Stores:'
+    - '  &8- &fEmeralds&7, &fDiamonds&7, &fIron&7,'
+    - '  &8- &fTNT&7, &fBlaze Rods&7, &fEnderpearls&7,'
+    - '  &8- &fString&7, &fRotten Flesh&7, &fBones&7.'
+    - ''
+  material-items:
+    - '388;&a;&2;Silverfish'
+    - '264;&b;&9;Witches'
+    - '265;&f;&8;Iron Golems'
+    - '46;&c;&4;Creepers'
+    - '369;&f;&f;Temp'
+    - '368;&f;&f;Temp'
+    - '287;&f;&f;Temp'
+    - '367;&f;&f;Temp'
+    - '352;&f;&f;Temp'
+  menu:
+    title: "Chunk Collector"
+    rows: 3
+    item-slots: [9, 10, 11, 12, 13, 14, 15, 16, 17]
+    item:
+      display: '&a&lMATERIAL: {item-color}{material}'
+      lore:
+        - ' {item-secondary-color}* &7Drops from: {item-color}{dropped-entity}'
+        - ' {item-secondary-color}* &7Amount stored: {item-color}{amount-stored}'
+    pick-up:
+      material: 160
+      data: 4
+      display: '&cPick-Up &7(Click)'
+      lore:
+        - ' Some lore'
+      slot: 22
+  confirmation-menu:
+    title: "Confirm Chunk Collector Pickup"
+    rows: 1
+    items:
+      confirm:
+        material: 160
+        data: 11
+        display: 'Click to confirm'
+        lore: []
+        slot: 3
+      deny:
+        material: 160
+        data: 15
+        display: 'Click to deny'
+        lore: []
+        slot: 5
+      beacon:
+        material: 138
+        data: 0
+        slot: 4
+        display: 'Collector Item'
+        lore: ['']
 
 #    _____             _
 #   |  _  |___ _ _ ___| |_ ___ ___

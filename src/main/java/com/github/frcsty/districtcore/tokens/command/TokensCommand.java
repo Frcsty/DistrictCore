@@ -11,7 +11,6 @@ import me.mattstudios.mf.annotations.Permission;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
@@ -29,7 +28,6 @@ public class TokensCommand extends CommandBase {
     @Default
     @Permission("tokens.check")
     public void onTokensCommand(final CommandSender sender, final String[] args) {
-        final FileConfiguration config = core.getConfig();
         final TokenManager manager = plugin.getTokenManager();
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
@@ -37,7 +35,7 @@ public class TokensCommand extends CommandBase {
             }
 
             final Player player = (Player) sender;
-            player.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.tokens-check-self")
+            player.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("tokens-check-self")
                     , "{tokens}", String.valueOf(manager.getTokens(player)))));
             return;
         }
@@ -45,11 +43,11 @@ public class TokensCommand extends CommandBase {
         final Player target = Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-player")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-player")));
             return;
         }
 
-        sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.tokens-check-other")
+        sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("tokens-check-other")
                 , "{tokens}", String.valueOf(manager.getTokens(target))
                 , "{player}", target.getName())));
     }

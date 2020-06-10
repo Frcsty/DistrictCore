@@ -10,7 +10,6 @@ import me.mattstudios.mf.annotations.SubCommand;
 import me.mattstudios.mf.base.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
@@ -28,15 +27,14 @@ public class TokensGiveCommand extends CommandBase {
     @SubCommand("give")
     @Permission("tokens.give")
     public void tokensGiveCommand(final CommandSender sender, final String target, final Long input) {
-        final FileConfiguration config = core.getConfig();
         final Player player = Bukkit.getPlayer(target);
         if (player == null) {
-            sender.sendMessage(Color.colorize(config.getString("messages.invalid-player")));
+            sender.sendMessage(Color.colorize(core.getMessageLoader().getMessage("invalid-player")));
             return;
         }
 
         plugin.getTokenManager().addTokens(player, input);
-        sender.sendMessage(Color.colorize(Replace.replaceString(config.getString("messages.gave-tokens")
+        sender.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("gave-tokens")
                 , "{player}", player.getName()
                 , "{tokens}", String.valueOf(input))));
     }
