@@ -3,13 +3,17 @@
     <words>
       <w>cegg</w>
       <w>ceggs</w>
+      <w>cooldown</w>
       <w>craftwand</w>
+      <w>dcore</w>
+      <w>districtcore</w>
       <w>districtstatistics</w>
       <w>ender</w>
       <w>enderpearls</w>
       <w>endsound</w>
       <w>frcsty</w>
       <w>golems</w>
+      <w>interacter</w>
       <w>leaderboard</w>
       <w>leaderboards</w>
       <w>lightningwand</w>
@@ -19,6 +23,7 @@
       <w>revealsound</w>
       <w>sandwand</w>
       <w>sellwand</w>
+      <w>spawner</w>
       <w>spawners</w>
       <w>traypick</w>
       <w>trenchpick</w>
