@@ -1,4 +1,4 @@
-package com.github.frcsty.districtcore.plugins.tools.util;
+package com.github.frcsty.districtcore.dependency.util;
 
 import com.github.frcsty.districtcore.DistrictCore;
 import org.bukkit.Bukkit;

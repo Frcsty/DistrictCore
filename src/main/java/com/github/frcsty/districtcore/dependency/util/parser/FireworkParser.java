@@ -1,4 +1,4 @@
-package com.github.frcsty.districtcore.plugins.pouches.util.parser;
+package com.github.frcsty.districtcore.dependency.util.parser;
 
 import org.bukkit.Color;
 

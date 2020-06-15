@@ -2,10 +2,7 @@ package com.github.frcsty.districtcore.plugins.tokens;
 
 import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
-import com.github.frcsty.districtcore.plugins.tokens.command.TokensCommand;
-import com.github.frcsty.districtcore.plugins.tokens.command.TokensGiveCommand;
-import com.github.frcsty.districtcore.plugins.tokens.command.TokensPayCommand;
-import com.github.frcsty.districtcore.plugins.tokens.command.TokensResetCommand;
+import com.github.frcsty.districtcore.plugins.tokens.command.*;
 import com.github.frcsty.districtcore.plugins.tokens.listener.CreateTokenPlayerListener;
 import com.github.frcsty.districtcore.plugins.tokens.placeholder.Placeholders;
 import com.github.frcsty.districtcore.plugins.tokens.token.FileManager;
@@ -33,7 +30,8 @@ public class TokensPlugin implements CorePlugin {
         this.tokenManager = new TokenManager(tokenStorage);
 
         core.addCommands(new TokensCommand(this, core), new TokensGiveCommand(this, core)
-                , new TokensResetCommand(this, core), new TokensPayCommand(this, core));
+                , new TokensResetCommand(this, core), new TokensPayCommand(this, core)
+                , new TokenShopCommand(core, this), new TokensRemoveCommand(core, this));
         new Placeholders(tokenManager).register();
 
         core.addListener(new CreateTokenPlayerListener(this));

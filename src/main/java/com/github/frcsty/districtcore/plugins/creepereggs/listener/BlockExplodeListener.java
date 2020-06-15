@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.plugins.creepereggs.listener;
 
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
 import com.github.frcsty.districtcore.plugins.creepereggs.CreeperEggsPlugin;
 import com.github.frcsty.districtcore.plugins.creepereggs.object.SpawnEgg;
 import de.dustplanet.util.SilkUtil;
@@ -40,7 +41,7 @@ public class BlockExplodeListener implements Listener {
             return;
         }
 
-        final SilkUtil util = plugin.getSilkUtil();
+        final SilkUtil util = DependencyUtil.getSilkUtil();
         final boolean spawner = event.blockList().stream().anyMatch(m -> m.getType() == util.nmsProvider.getSpawnerMaterial());
 
         if (!spawner) {

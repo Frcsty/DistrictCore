@@ -9,17 +9,17 @@ import java.util.UUID;
 public class StatisticWrapper {
 
     private final UUID player;
-    private final Map<String, Long> statistics = new HashMap<>();
+    private final Map<String, Double> statistics = new HashMap<>();
 
     StatisticWrapper(final OfflinePlayer player) {
         this.player = player.getUniqueId();
     }
 
-    public final void setStatistic(final String path, final Long value) {
+    public final void setStatistic(final String path, final Double value) {
         this.statistics.put(path, value);
     }
 
-    public final long getStatistic(final String path) {
+    public final double getStatistic(final String path) {
         return this.statistics.get(path) == null ? 0 : this.statistics.get(path);
     }
 

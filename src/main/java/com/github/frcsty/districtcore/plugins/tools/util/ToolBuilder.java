@@ -22,6 +22,12 @@ public class ToolBuilder {
         this.amount = amount;
     }
 
+    public ToolBuilder(final DistrictCore core, final String tool) {
+        this.tools = core.getSectionLoader().getSection("tools");
+        this.tool = tool;
+        this.amount = 1;
+    }
+
     public final ItemStack getItem() {
         ItemStack item = new ItemBuilder(new ItemStack(tools.getInt(tool + ".material"), amount
                 , (short) tools.getInt(tool + ".data")))

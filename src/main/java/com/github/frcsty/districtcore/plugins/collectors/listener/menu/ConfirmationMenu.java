@@ -30,7 +30,7 @@ class ConfirmationMenu {
                 final Player player = (Player) event.getWhoClicked();
 
                 if (itemPath.equalsIgnoreCase("confirm")) {
-                    player.sendMessage("picked up collector");
+                    player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("picked-up-collector")));
                     plugin.getCollectorStorage().removeCollectorChunk(player.getLocation().getChunk());
                     block.setType(Material.AIR);
                     player.getInventory().addItem(CollectorBuilder.getItem(plugin.getCollectorStorage(), 1));

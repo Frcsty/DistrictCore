@@ -4,6 +4,7 @@ import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.plugins.statistics.command.LeaderboardCommand;
 import com.github.frcsty.districtcore.plugins.statistics.command.StatsCommand;
+import com.github.frcsty.districtcore.plugins.statistics.placeholder.Placeholders;
 import com.github.frcsty.districtcore.plugins.statistics.statistic.StatisticStorage;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -21,12 +22,13 @@ public class StatisticsPlugin implements CorePlugin {
     public void onEnable() {
         core.addCommands(new StatsCommand(core, this), new LeaderboardCommand(core, this));
 
+        new Placeholders(this).register();
         new BukkitRunnable() {
             @Override
             public void run() {
                 storage.loadUsers(getPlugin(DistrictCore.class));
             }
-        }.runTaskTimerAsynchronously(core, 10, 36000);
+        }.runTaskTimerAsynchronously(core, 10, 6000);
     }
 
     public StatisticStorage getStorage() {

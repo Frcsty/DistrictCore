@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.frcsty:MF-GUI:dc0024d">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/frcsty/MF-GUI/dc0024d/MF-GUI-dc0024d.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/frcsty/MF-GUI/dc0024d/MF-GUI-dc0024d-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/frcsty/MF-GUI/dc0024d/MF-GUI-dc0024d-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,5 +1,6 @@
 package com.github.frcsty.districtcore.plugins.tools.listener;
 
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
 import me.mattstudios.mfgui.gui.components.ItemNBT;
 import net.brcdev.shopgui.ShopGuiPlusApi;
 import org.bukkit.Location;
@@ -16,8 +17,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.github.frcsty.districtcore.plugins.tools.ToolsPlugin.getEconomy;
 
 public class BlockDamageListener implements Listener {
 
@@ -91,7 +90,7 @@ public class BlockDamageListener implements Listener {
             }
         }
 
-        drops.forEach((key, value) -> getEconomy().depositPlayer(player, value * ShopGuiPlusApi.getItemStackPriceSell(new ItemStack(key))));
+        drops.forEach((key, value) -> DependencyUtil.getEconomy().depositPlayer(player, value * ShopGuiPlusApi.getItemStackPriceSell(new ItemStack(key))));
         event.setCancelled(true);
     }
 }

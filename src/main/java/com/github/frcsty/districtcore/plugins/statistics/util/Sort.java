@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 public class Sort {
 
-    public static Map<UUID, Long> getSortedMap(final StatisticStorage storage, final String path) {
-        final Map<UUID, Long> map = new HashMap<>();
+    public static Map<UUID, Double> getSortedMap(final StatisticStorage storage, final String path) {
+        final Map<UUID, Double> map = new HashMap<>();
 
         for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
             final StatisticWrapper wrapper = storage.getUserStatisticWrapper(player);

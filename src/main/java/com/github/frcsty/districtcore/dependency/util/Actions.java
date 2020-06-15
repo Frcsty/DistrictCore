@@ -1,7 +1,7 @@
-package com.github.frcsty.districtcore.plugins.pouches.util;
+package com.github.frcsty.districtcore.dependency.util;
 
-import com.github.frcsty.districtcore.plugins.pouches.util.lib.ActionManager;
-import com.github.frcsty.districtcore.plugins.pouches.util.parser.FireworkParser;
+import com.github.frcsty.districtcore.dependency.util.lib.ActionManager;
+import com.github.frcsty.districtcore.dependency.util.parser.FireworkParser;
 import me.gabytm.util.actions.Action;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;

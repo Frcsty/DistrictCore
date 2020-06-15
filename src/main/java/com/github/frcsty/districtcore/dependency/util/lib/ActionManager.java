@@ -1,4 +1,4 @@
-package com.github.frcsty.districtcore.plugins.pouches.util.lib;
+package com.github.frcsty.districtcore.dependency.util.lib;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.primitives.Ints;

@@ -1,6 +1,7 @@
 package com.github.frcsty.districtcore.plugins.collectors.listener.menu;
 
 import com.github.frcsty.districtcore.DistrictCore;
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
 import com.github.frcsty.districtcore.plugins.collectors.CollectorsPlugin;
 import com.github.frcsty.districtcore.plugins.collectors.collector.chunk.CollectorChunk;
 import com.github.frcsty.districtcore.util.Color;
@@ -17,8 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
-
-import static com.github.frcsty.districtcore.plugins.tools.ToolsPlugin.getEconomy;
 
 public final class CollectorMenu {
 
@@ -50,7 +49,7 @@ public final class CollectorMenu {
                 final Player player = (Player) event.getWhoClicked();
                 final double price = ShopGuiPlusApi.getItemStackPriceSell(new ItemStack(Integer.parseInt(components[0]), amount));
 
-                getEconomy().depositPlayer(player, price);
+                DependencyUtil.getEconomy().depositPlayer(player, price);
                 player.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("sold-collector-items")
                         , "{amount}", String.valueOf(amount)
                         , "{material}", getFormattedMaterial(Integer.parseInt(components[0]))

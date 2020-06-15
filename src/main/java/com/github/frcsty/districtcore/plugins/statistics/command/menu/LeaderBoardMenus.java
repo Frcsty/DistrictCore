@@ -30,8 +30,8 @@ class LeaderBoardMenus {
         final ConfigurationSection noUser = section.getConfigurationSection("no-user");
         final ConfigurationSection items = section.getConfigurationSection("items");
         final List<Integer> slots = leaderboard.getIntegerList("slots");
-        final Map<UUID, Long> statisticMap = Sort.getSortedMap(plugin.getStorage(), path);
-        final Iterator<Map.Entry<UUID, Long>> iterator = statisticMap.entrySet().iterator();
+        final Map<UUID, Double> statisticMap = Sort.getSortedMap(plugin.getStorage(), path);
+        final Iterator<Map.Entry<UUID, Double>> iterator = statisticMap.entrySet().iterator();
         if (!iterator.hasNext()) {
             return null;
         }
@@ -54,7 +54,7 @@ class LeaderBoardMenus {
                 gui.setItem(slot, new GuiItem(item));
                 continue;
             }
-            final Map.Entry<UUID, Long> user = iterator.next();
+            final Map.Entry<UUID, Double> user = iterator.next();
             final OfflinePlayer player = Bukkit.getOfflinePlayer(user.getKey());
             final int playerPosition = place++;
             ItemStack item = new ItemBuilder(new ItemStack(leaderboard.getInt("material"), 1

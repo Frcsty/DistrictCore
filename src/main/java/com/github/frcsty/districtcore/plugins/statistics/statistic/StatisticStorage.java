@@ -1,6 +1,7 @@
 package com.github.frcsty.districtcore.plugins.statistics.statistic;
 
 import com.github.frcsty.districtcore.DistrictCore;
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -42,20 +43,21 @@ public class StatisticStorage {
 
                         for (String value : getPaths(core)) {
                             if (object.get(value) == null) {
-                                wrapper.setStatistic(value, (long) 0);
+                                wrapper.setStatistic(value, (double) 0);
                                 continue;
                             }
-                            wrapper.setStatistic(value, (long) object.get(value));
+                            wrapper.setStatistic(value, Double.valueOf(object.get(value).toString()));
                         }
                     } catch (ParseException | IOException ex) {
                         Bukkit.getLogger().log(Level.WARNING, "Failed to retrieve statistics file for user: " + player.getName());
                     }
 
+                    wrapper.setStatistic("balance", DependencyUtil.getEconomy().getBalance(player));
                     setWrapperUser(player, wrapper);
                     amount++;
                 }
 
-                Bukkit.getLogger().log(Level.INFO, "[DistrictStatistic] Loaded statistics in: " + (System.currentTimeMillis() - startTime) + "ms. (Users: " + amount + ")");
+                // Bukkit.getLogger().log(Level.INFO, "[DistrictStatistic] Loaded statistics in: " + (System.currentTimeMillis() - startTime) + "ms. (Users: " + amount + ")");
             }
         }.runTaskAsynchronously(core);
     }

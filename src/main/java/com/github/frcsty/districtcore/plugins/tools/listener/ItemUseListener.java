@@ -1,14 +1,17 @@
 package com.github.frcsty.districtcore.plugins.tools.listener;
 
 import com.github.frcsty.districtcore.DistrictCore;
-import com.github.frcsty.districtcore.plugins.tools.ToolsPlugin;
-import com.github.frcsty.districtcore.plugins.tools.util.ActionBarAPI;
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
+import com.github.frcsty.districtcore.dependency.util.ActionBarAPI;
+import com.github.frcsty.districtcore.plugins.tools.listener.menu.ConfirmationMenu;
 import com.github.frcsty.districtcore.plugins.tools.util.Condense;
 import com.github.frcsty.districtcore.plugins.tools.util.ToolBuilder;
 import com.github.frcsty.districtcore.util.Color;
 import com.github.frcsty.districtcore.util.Replace;
 import me.mattstudios.mfgui.gui.components.ItemNBT;
+import me.mattstudios.mfgui.gui.guis.Gui;
 import net.brcdev.shopgui.ShopGuiPlusApi;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -25,19 +28,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-import static com.github.frcsty.districtcore.plugins.tools.ToolsPlugin.getEconomy;
-
 public class ItemUseListener implements Listener {
 
-    private final ToolsPlugin plugin;
     private final DistrictCore core;
 
-    public ItemUseListener(final DistrictCore core, final ToolsPlugin plugin) {
+    public ItemUseListener(final DistrictCore core) {
         this.core = core;
-        this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onItemUser(PlayerInteractEvent event) {
         final ItemStack item = event.getItem();
         final Action action = event.getAction();
@@ -45,21 +44,11 @@ public class ItemUseListener implements Listener {
         final Block block = event.getClickedBlock();
         final String data = ItemNBT.getNBTTag(item, "tool");
         final World world = player.getWorld();
-        final ActionBarAPI actionBar = plugin.getActionBarAPI();
-
-        if (item == null) {
-            return;
-        }
-        if (data.length() == 0) {
-            return;
-        }
-        if (data.equalsIgnoreCase("tray") || data.equalsIgnoreCase("trench")) {
-            return;
-        }
-        if (action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) {
-            return;
-        }
-
+        final ActionBarAPI actionBar = DependencyUtil.getActionBarAPI();
+        if (item == null) return;
+        if (data.length() == 0) return;
+        if (data.equalsIgnoreCase("tray") || data.equalsIgnoreCase("trench")) return;
+        if (action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) return;
         if (data.equalsIgnoreCase("sand")) {
             final String delay = ItemNBT.getNBTTag(item, "delay");
             final List<Material> materials = Arrays.asList(Material.SAND, Material.GRAVEL);
@@ -166,10 +155,20 @@ public class ItemUseListener implements Listener {
                 }
             }
 
-            getEconomy().depositPlayer(player, amount * multiplier);
+            DependencyUtil.getEconomy().depositPlayer(player, amount * multiplier);
             actionBar.sendActionBar(player, Replace.replaceString(Color.colorize(core.getMessageLoader().getMessage("sold-chest-contents")), "{amount}", String.valueOf(amount * multiplier), "{multi}", String.valueOf(multiplier)));
             event.setCancelled(true);
         }
-    }
+        if (data.equalsIgnoreCase("buster")) {
+            final int delay = Integer.valueOf(ItemNBT.getNBTTag(item, "delay"));
 
+            if (block.getLocation() == null) return;
+            final Chunk chunk = block.getChunk();
+
+            final Gui menu = ConfirmationMenu.getMenu(core, chunk, delay);
+
+            event.setCancelled(true);
+            menu.open(player);
+        }
+    }
 }

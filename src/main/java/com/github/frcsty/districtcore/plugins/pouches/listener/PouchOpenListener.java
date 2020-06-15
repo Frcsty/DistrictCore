@@ -1,6 +1,7 @@
 package com.github.frcsty.districtcore.plugins.pouches.listener;
 
 import com.github.frcsty.districtcore.DistrictCore;
+import com.github.frcsty.districtcore.dependency.DependencyUtil;
 import com.github.frcsty.districtcore.plugins.pouches.PouchesPlugin;
 import com.github.frcsty.districtcore.plugins.pouches.object.Pouch;
 import com.github.frcsty.districtcore.util.Color;
@@ -143,7 +144,7 @@ public class PouchOpenListener implements Listener {
                                 viewedTitle.append(obfuscateColour).append(ChatColor.MAGIC).append(obfuscateDigitChar);
                         }
                     }
-                    plugin.getTitle().sendTitle(player, prefixColour + pouch.getSymbol() + viewedTitle.toString() + suffixColour, Color.colorize(title.getString("subtitle")));
+                    DependencyUtil.getTitleManager().sendTitle(player, prefixColour + pouch.getSymbol() + viewedTitle.toString() + suffixColour, Color.colorize(title.getString("subtitle")));
                 } else {
                     position = number.length();
                 }
@@ -151,7 +152,7 @@ public class PouchOpenListener implements Listener {
                     this.cancel();
                     if (player.isOnline()) {
                         player.playSound(player.getLocation(), Sound.valueOf(sound.getString("endsound")), 3, 1);
-                        plugin.getActionManager().execute(player, Replace.replaceList(pouch.getActions(), "{amount}", String.valueOf(random), "{player}", player.getName()));
+                        DependencyUtil.getActionManager().execute(player, Replace.replaceList(pouch.getActions(), "{amount}", String.valueOf(random), "{player}", player.getName()));
                     }
                     return;
                 }

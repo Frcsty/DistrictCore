@@ -1,4 +1,4 @@
-package com.github.frcsty.districtcore.plugins.pouches.util.title;
+package com.github.frcsty.districtcore.dependency.util.title;
 
 import org.bukkit.entity.Player;
 
