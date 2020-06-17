@@ -29,6 +29,10 @@ public final class CollectorChunk {
         this.contents.put(material, contents.getOrDefault(material, 0) + amount);
     }
 
+    public void removeMaterial(final Material material, final int amount) {
+        this.contents.put(material, contents.get(material) - amount);
+    }
+
     public Map<Material, Integer> getContents() {
         return this.contents;
     }

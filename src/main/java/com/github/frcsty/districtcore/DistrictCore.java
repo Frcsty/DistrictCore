@@ -9,7 +9,6 @@ import com.github.frcsty.districtcore.plugins.collectors.CollectorsPlugin;
 import com.github.frcsty.districtcore.plugins.creepereggs.CreeperEggsPlugin;
 import com.github.frcsty.districtcore.plugins.elixirs.ElixirsPlugin;
 import com.github.frcsty.districtcore.plugins.pouches.PouchesPlugin;
-import com.github.frcsty.districtcore.plugins.roam.RoamPlugin;
 import com.github.frcsty.districtcore.plugins.statistics.StatisticsPlugin;
 import com.github.frcsty.districtcore.plugins.tokens.TokensPlugin;
 import com.github.frcsty.districtcore.plugins.tools.ToolsPlugin;
@@ -29,7 +28,7 @@ public final class DistrictCore extends JavaPlugin {
     private final List<Listener> listeners = new ArrayList<>();
     private final List<CorePlugin> plugins = Arrays.asList(new TokensPlugin(this), new ToolsPlugin(this), new CreeperEggsPlugin(this)
             , new StatisticsPlugin(this), new ElixirsPlugin(this), new PouchesPlugin(this), new CollectorsPlugin(this)
-            , new PatchesPlugin(this), new CommandsPlugin(this), new RoamPlugin(this));
+            , new PatchesPlugin(this), new CommandsPlugin(this));
 
     private final DependencyUtil dependencyUtil = new DependencyUtil(this);
 

@@ -81,12 +81,8 @@ public class StatisticStorage {
         return core.getConfig().getStringList("statistics");
     }
 
-    public final void setWrapperUser(final OfflinePlayer player, final StatisticWrapper wrapper) {
+    private void setWrapperUser(final OfflinePlayer player, final StatisticWrapper wrapper) {
         this.statisticWrapperMap.put(player.getUniqueId(), wrapper);
-    }
-
-    public final Map<UUID, StatisticWrapper> getStatisticWrapperMap() {
-        return this.statisticWrapperMap;
     }
 
     public final StatisticWrapper getUserStatisticWrapper(final OfflinePlayer player) {

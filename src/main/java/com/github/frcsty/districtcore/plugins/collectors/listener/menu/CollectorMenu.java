@@ -47,6 +47,12 @@ public final class CollectorMenu {
                             , "{amount-stored}", String.valueOf(amount))))
                     .build(), event -> {
                 final Player player = (Player) event.getWhoClicked();
+
+                if (Integer.valueOf(components[0]) == 46) {
+                    handleTntTakeOut(player, collectorChunk, core);
+                    plugin.getCollectorStorage().updateCollectorChunk(player.getLocation().getChunk(), collectorChunk);
+                    return;
+                }
                 final double price = ShopGuiPlusApi.getItemStackPriceSell(new ItemStack(Integer.parseInt(components[0]), amount));
 
                 DependencyUtil.getEconomy().depositPlayer(player, price);
@@ -109,4 +115,30 @@ public final class CollectorMenu {
         }
     }
 
+    private static void handleTntTakeOut(final Player player, final CollectorChunk collectorChunk, final DistrictCore core) {
+        final Material material = Material.TNT;
+        int amount = 0;
+        for (ItemStack item : player.getInventory().getContents()) {
+            if (item == null || item.getType() == Material.AIR) {
+                amount += 64;
+            }
+        }
+
+        final int materialAmount = collectorChunk.getContents().get(material);
+        if (materialAmount >= amount) {
+            for (int i = 0; i < amount/64; i++) {
+                player.getInventory().addItem(new ItemStack(material, 64));
+            }
+            collectorChunk.removeMaterial(material, amount);
+        } else {
+            int finishAmount = materialAmount - materialAmount%64;
+            for (int i = 0; i < materialAmount/64; i++) {
+                player.getInventory().addItem(new ItemStack(material, 64));
+            }
+            collectorChunk.removeMaterial(material, finishAmount);
+            amount = finishAmount;
+        }
+        player.sendMessage(Color.colorize(Replace.replaceString(core.getMessageLoader().getMessage("withdrawn-tnt")
+                , "{amount}", String.valueOf(amount))));
+    }
 }

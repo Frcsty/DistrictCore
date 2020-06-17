@@ -15,15 +15,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.*;
 
 class LeaderBoardMenus {
 
     static Gui getLeaderboardMenu(final DistrictCore core, final StatisticsPlugin plugin, @NotNull final String menu) {
-        final ConfigurationSection section = core.getSectionLoader().getSection("menus." + menu);
+        final ConfigurationSection section = core.getSectionLoader().getSection("menus").getConfigurationSection(menu);
         final Gui gui = new Gui(core, section.getInt("rows"), Color.colorize(section.getString("title")));
         final String path = section.getString("path");
         final ConfigurationSection leaderboard = section.getConfigurationSection("leaderboard");
@@ -65,7 +64,7 @@ class LeaderBoardMenus {
 
                     .setLore(Color.colorize(Replace.replaceList(leaderboard.getStringList("lore")
                             , "{player}", player.getName()
-                            , "{statistic-value}", String.valueOf(user.getValue())
+                            , "{statistic-value}", getStatisticValue(menu, user.getValue())
                             , "{position}", String.valueOf(playerPosition))))
                     .build();
 
@@ -95,4 +94,19 @@ class LeaderBoardMenus {
         return gui;
     }
 
+    private static String getStatisticValue(final String statistic, final Double amount) {
+        if (statistic.equalsIgnoreCase("balance")) {
+            return format.format(amount);
+        }
+        return format(amount);
+    }
+
+    private static final DecimalFormat format = new DecimalFormat("#,###");
+
+    private static String format(double amount) {
+        final NumberFormat format = NumberFormat.getInstance(Locale.ENGLISH);
+        format.setMaximumFractionDigits(2);
+        format.setMinimumFractionDigits(0);
+        return format.format(amount);
+    }
 }
