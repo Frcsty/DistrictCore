@@ -24,7 +24,7 @@ public class TokensRemoveCommand extends CommandBase {
     }
 
     @SubCommand("remove")
-    @Permission("tokens.remove")
+    @Permission("district.tokens.command.remove")
     public void tokensRemoveCommand(final CommandSender sender, final String target, final Long amount) {
         final Player player = Bukkit.getPlayerExact(target);
 

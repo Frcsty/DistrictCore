@@ -26,7 +26,7 @@ public class TokensResetCommand extends CommandBase {
     }
 
     @SubCommand("reset")
-    @Permission("tokens.reset")
+    @Permission("district.tokens.command.reset")
     public void tokensResetCommand(final CommandSender sender, final String target) {
         final Player player = Bukkit.getPlayerExact(target);
         if (player == null) {

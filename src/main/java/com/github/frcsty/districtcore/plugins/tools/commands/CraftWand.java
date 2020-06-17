@@ -23,7 +23,7 @@ public class CraftWand extends CommandBase {
     }
 
     @Default
-    @Permission("tools.craftwand")
+    @Permission("district.tools.command.craftwand")
     public void craftWandCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

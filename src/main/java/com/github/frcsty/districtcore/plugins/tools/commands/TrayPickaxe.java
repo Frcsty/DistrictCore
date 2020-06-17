@@ -25,7 +25,7 @@ public class TrayPickaxe extends CommandBase {
     }
 
     @Default
-    @Permission("tools.traypick")
+    @Permission("district.tools.command.traypick")
     public void trayPickCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

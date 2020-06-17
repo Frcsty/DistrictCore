@@ -28,7 +28,7 @@ public class ElixirGiveCommand extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("elixirs.commands.give")
+    @Permission("district.elixirs.command.give")
     public void giveElixir(final CommandSender sender, final String t, final String e, final Integer amount) {
         final Player target = Bukkit.getPlayerExact(t);
         final String elixir = e.toLowerCase();

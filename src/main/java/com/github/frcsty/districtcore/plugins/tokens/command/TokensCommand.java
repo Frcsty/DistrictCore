@@ -26,7 +26,7 @@ public class TokensCommand extends CommandBase {
     }
 
     @Default
-    @Permission("tokens.check")
+    @Permission("district.tokens.command.balance")
     public void onTokensCommand(final CommandSender sender, final String[] args) {
         final TokenManager manager = plugin.getTokenManager();
         if (args.length == 0) {

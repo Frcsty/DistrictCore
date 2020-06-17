@@ -29,7 +29,7 @@ public class GivePouchCommand extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("pouches.commands.give")
+    @Permission("district.pouches.command.give")
     public void givePouch(final CommandSender sender, @Completion("#pouches") final String pouch, final String player, @Completion("#range:64") final Integer amount) {
         final Player target = Bukkit.getPlayerExact(player);
         final ItemStack item = getItem(plugin.getPouchStorage(), pouch, amount);

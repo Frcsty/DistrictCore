@@ -1,4 +1,4 @@
-package com.github.frcsty.districtcore.commands;
+package com.github.frcsty.districtcore.commands.command;
 
 import com.github.frcsty.districtcore.DistrictCore;
 import com.github.frcsty.districtcore.util.Color;
@@ -17,14 +17,12 @@ public class ReloadCommand extends CommandBase {
 
     private final DistrictCore core;
 
-    ReloadCommand(final DistrictCore core) {
+    public ReloadCommand(final DistrictCore core) {
         this.core = core;
-
-        core.addCommand(this);
     }
 
     @SubCommand("reload")
-    @Permission("core.reload")
+    @Permission("district.core.command.reload")
     public void onCoreReload(final CommandSender sender) {
         final long start = System.currentTimeMillis();
 

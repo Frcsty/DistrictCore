@@ -22,7 +22,7 @@ public class TokenShopCommand extends CommandBase {
     }
 
     @SubCommand("shop")
-    @Permission("tokens.shop")
+    @Permission("district.tokens.command.shop")
     public void onShopCommand(final Player player) {
         final Gui menu = ShopMenu.getShopMenu(core, plugin);
 

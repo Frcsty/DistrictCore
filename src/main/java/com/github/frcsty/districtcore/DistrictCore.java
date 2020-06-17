@@ -41,13 +41,13 @@ public final class DistrictCore extends JavaPlugin {
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
-        dependencyUtil.onEnable();
         commandManager = new CommandManager(this);
 
         messageLoader.load(this);
         sectionLoader.load(this);
 
         plugins.forEach(CorePlugin::onEnable);
+        dependencyUtil.onEnable();
         commands.forEach(commandManager::register);
         listeners.forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }

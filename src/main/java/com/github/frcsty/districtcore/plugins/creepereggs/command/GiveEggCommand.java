@@ -30,7 +30,7 @@ public class GiveEggCommand extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("ceggs.commands.give")
+    @Permission("district.ceggs.command.give")
     public void giveCegg(final CommandSender sender, @Completion("#players") String inputTarget, String inputCegg, final Integer amount) {
         final Player target = Bukkit.getPlayerExact(inputTarget);
 

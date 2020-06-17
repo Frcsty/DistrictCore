@@ -26,7 +26,7 @@ public class ChunkBuster extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("tools.chunkbuster")
+    @Permission("district.tools.command.chunkbuster")
     public void chunkBusterCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

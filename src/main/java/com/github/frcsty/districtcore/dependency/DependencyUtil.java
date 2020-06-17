@@ -84,6 +84,7 @@ public final class DependencyUtil {
 
         title = new Title_BukkitNoTimings();
 
+        actionBarAPI.enable();
         actionManager = new ActionManager(core);
         actionManager.loadDefaults();
         actions.loadCustomActions(actionManager);

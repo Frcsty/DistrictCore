@@ -38,7 +38,17 @@ messages:
   sold-collector-items: 'You have sold {amount} {material} for ${price}'
   disabled-piston-mechanic: 'You may not use pistons to move this block!'
   started-chunk-buster: 'Activated chunk buster!'
+  roam-disabled-commands: '&7&oCommands are disabled while in roam!'
+  roam-entity-killed: '&7&oYour entity has been killed while in roam!'
+  roam-enabled: '&7&oRoam enabled'
+  roam-disabled: '&7&oRoam disabled'
+  roam-cannot-exit-bounds: '&7&oYou cannot exit roam bounds!'
+  roam-actionbar: '&eEntity Health&8: &f{entity-health}&8/&f20 &8&l: &eDistance&8: &f{distance}m'
 
+core-commands:
+  discord-message: ['Join our discord tralala..']
+  website-message: ['Check out or website tralalala..']
+  store-message: ['Check out our store to support the server tralala..']
 patches:
   disabled-recipes:
     materials: [HOPPER, RAILS, ACTIVATOR_RAIL, DETECTOR_RAIL, POWERED_RAIL, GOLDEN_APPLE, BOAT, MINECART]
@@ -55,6 +65,11 @@ patches:
   entity-mechanics:
     disable-use: [HORSE, DONKEY]
 
+roam:
+  radius: 128
+  density: 250
+  effect: HEART
+  amount: 1
 
 #    _____     _
 #   |_   _|___| |_ ___ ___ ___

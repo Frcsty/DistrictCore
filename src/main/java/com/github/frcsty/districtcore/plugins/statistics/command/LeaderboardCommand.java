@@ -26,7 +26,7 @@ public class LeaderboardCommand extends CommandBase {
     }
 
     @Default
-    @Permission("statistics.leaderboard")
+    @Permission("district.statistics.command.leaderboard")
     public void leaderboardCommand(final Player player) {
         final Gui menu = SelectorMenu.getSelectorMenu(core, plugin);
 

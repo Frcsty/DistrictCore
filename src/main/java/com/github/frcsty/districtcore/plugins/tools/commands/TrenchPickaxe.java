@@ -25,7 +25,7 @@ public class TrenchPickaxe extends CommandBase {
     }
 
     @Default
-    @Permission("tools.trenchpick")
+    @Permission("district.tools.command.trenchpick")
     public void trenchPickCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

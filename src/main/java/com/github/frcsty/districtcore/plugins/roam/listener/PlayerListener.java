@@ -36,7 +36,7 @@ public class PlayerListener implements Listener {
         String command = event.getMessage().replace("/", "");
         if (!command.equalsIgnoreCase("roam")) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(Color.colorize("&7&oCommands are disabled while in roam!"));
+            event.getPlayer().sendMessage(Color.colorize(core.getMessageLoader().getMessage("roam-disabled-commands")));
         }
     }
 
@@ -67,7 +67,7 @@ public class PlayerListener implements Listener {
         final RoamPlayer roamPlayer = RoamPlugin.getRoamPlayers().get(player);
         if (roamPlayer != null) {
             roamPlayer.disableRoam(player);
-            player.sendMessage(Color.colorize("&7&oYour entity has been killed while in roam!"));
+            player.sendMessage(Color.colorize(core.getMessageLoader().getMessage("roam-entity-killed")));
             RoamPlugin.getRoamPlayers().remove(player);
             player.setHealth(0);
         }

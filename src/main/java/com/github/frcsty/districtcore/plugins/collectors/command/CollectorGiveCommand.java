@@ -26,7 +26,7 @@ public class CollectorGiveCommand extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("collectors.give")
+    @Permission("district.collectors.command.give")
     public void giveCollectorCommand(final CommandSender sender, final String player, final Integer amount) {
         final Player target = Bukkit.getPlayerExact(player);
         final ItemStack item = CollectorBuilder.getItem(plugin.getCollectorStorage(), amount);

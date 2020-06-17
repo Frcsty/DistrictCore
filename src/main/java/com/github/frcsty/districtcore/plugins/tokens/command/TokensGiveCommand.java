@@ -25,7 +25,7 @@ public class TokensGiveCommand extends CommandBase {
     }
 
     @SubCommand("give")
-    @Permission("tokens.give")
+    @Permission("district.tokens.command.give")
     public void tokensGiveCommand(final CommandSender sender, final String target, final Long input) {
         final Player player = Bukkit.getPlayer(target);
         if (player == null) {

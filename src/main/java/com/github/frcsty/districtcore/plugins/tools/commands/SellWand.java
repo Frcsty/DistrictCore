@@ -23,7 +23,7 @@ public class SellWand extends CommandBase {
     }
 
     @Default
-    @Permission("tools.sellwand")
+    @Permission("district.tools.command.sellwand")
     public void sellWandCommand(final CommandSender sender, final String target, final Double multiplier, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

@@ -25,7 +25,7 @@ public class TokensPayCommand extends CommandBase {
     }
 
     @SubCommand("pay")
-    @Permission("tokens.pay")
+    @Permission("district.tokens.command.pay")
     public void tokensPayCommand(final Player player, final String targetString, final Long tokens) {
         final Player target = Bukkit.getPlayerExact(targetString);
 

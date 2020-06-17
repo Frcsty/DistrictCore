@@ -24,7 +24,7 @@ public class SandWand extends CommandBase {
     }
 
     @Default
-    @Permission("tools.sandwand")
+    @Permission("district.tools.command.sandwand")
     public void sandWandCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

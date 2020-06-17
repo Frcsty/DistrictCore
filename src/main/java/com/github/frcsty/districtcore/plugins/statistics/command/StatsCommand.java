@@ -28,7 +28,7 @@ public class StatsCommand extends CommandBase {
     }
 
     @Default
-    @Permission("statistics.check")
+    @Permission("district.statistics.command.stats")
     public void statisticsCommand(final CommandSender sender, final String[] args) {
 
         if (args.length == 0) {

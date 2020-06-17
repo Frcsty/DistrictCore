@@ -23,7 +23,7 @@ public class LightningWand extends CommandBase {
     }
 
     @Default
-    @Permission("tools.lightningwand")
+    @Permission("district.tools.command.lightningwand")
     public void lightningWandCommand(final CommandSender sender, final String target, final Integer amount) {
         if (!PlayerCheck.isPlayerValid(target, sender, core)) {
             return;

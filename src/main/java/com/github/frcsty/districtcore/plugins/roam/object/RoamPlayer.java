@@ -1,6 +1,5 @@
 package com.github.frcsty.districtcore.plugins.roam.object;
 
-import com.github.frcsty.districtcore.util.Color;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -22,8 +21,6 @@ public final class RoamPlayer {
     }
 
     public void enableRoam(final Player player) {
-        player.sendMessage(Color.colorize("&7&oRoam enabled"));
-
         entity = player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.VILLAGER);
         manageEntity(player);
         status = true;
@@ -31,8 +28,6 @@ public final class RoamPlayer {
     }
 
     public void disableRoam(final Player player) {
-        player.sendMessage(Color.colorize("&7&oRoam disabled"));
-
         removeEntity();
         status = false;
         player.teleport(location);
@@ -86,38 +81,15 @@ public final class RoamPlayer {
         return (LivingEntity) this.entity;
     }
 
-    public void spawnParticleBorder(final int offset) {
-        int pointDensity = 40; // pointDensity being how many points you want to draw per section.
-        double incr = 2 * Math.PI / pointDensity;
-        for (double phi = 0; phi < 2 * Math.PI; phi += incr) {
-            double z = offset * Math.sin(phi);
-            for (double theta = 0; theta < 2 * Math.PI; theta += incr) {
-                double y = offset * Math.cos(phi) * Math.sin(theta);
-                double x = offset * Math.cos(phi) * Math.cos(theta);
-                player.playEffect(new Location(location.getWorld(), x, y, z), Effect.HEART, 1);
+    public void spawnParticleBorder(final int offset, final int density, final String effect, final int amount) {
+        double increment = 2 * Math.PI / density;
+        for (double phi = 0; phi < 2 * Math.PI; phi += increment) {
+            double z = location.getBlockZ() + offset * Math.sin(phi);
+            for (double theta = 0; theta < 2 * Math.PI; theta += increment) {
+                double y = location.getBlockY() + offset * Math.cos(phi) * Math.sin(theta);
+                double x = location.getBlockX() + offset * Math.cos(phi) * Math.cos(theta);
+                player.playEffect(new Location(location.getWorld(), x, y, z), Effect.valueOf(effect), amount);
             }
         }
-
-        /*
-        int borderXR = location.getBlockX() - offset;
-        int borderZR = location.getBlockZ() - offset;
-        int borderXL = location.getBlockX() + offset;
-        int borderZL = location.getBlockZ() + offset;
-
-
-
-        for (int x = borderXR + (offset * 2); x > borderXR; x--) {
-            player.playEffect(new Location(location.getWorld(), x, y, borderZR), Effect.HEART, 1);
-        }
-        for (int z = borderZR + (offset * 2); z > borderZR; z--) {
-            player.playEffect(new Location(location.getWorld(), borderXR, y, z), Effect.HEART, 1);
-        }
-        for (int x = borderXL - (offset * 2); x < borderXL; x++) {
-            player.playEffect(new Location(location.getWorld(), x, y, borderZL), Effect.HEART, 1);
-        }
-        for (int z = borderZL - (offset * 2); z < borderZL; z++) {
-            player.playEffect(new Location(location.getWorld(), borderXL, y, z), Effect.HEART, 1);
-        }
-        */
     }
 }

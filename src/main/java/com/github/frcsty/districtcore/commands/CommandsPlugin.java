@@ -2,6 +2,7 @@ package com.github.frcsty.districtcore.commands;
 
 import com.github.frcsty.districtcore.CorePlugin;
 import com.github.frcsty.districtcore.DistrictCore;
+import com.github.frcsty.districtcore.commands.command.*;
 
 public class CommandsPlugin implements CorePlugin {
 
@@ -12,6 +13,8 @@ public class CommandsPlugin implements CorePlugin {
     }
 
     public void onEnable() {
-        core.addCommand(new ReloadCommand(core));
+        core.addCommands(new ReloadCommand(core), new DiscordCommand(core)
+                , new StoreCommand(core), new WebsiteCommand(core)
+                , new HelpCommand());
     }
 }
